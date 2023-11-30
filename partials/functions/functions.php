@@ -1,11 +1,16 @@
 <?php
-function generatePassword($passwordLen)
+function generatePassword($passwordLen, $doubleCharacter)
 {
     $symbols = '!?&%$<>^+-*/()[]{}@#_=';
     $letters = 'qwertyuiopasdfghjklzxcvbnm';
     $upLetters = strtoupper($letters);
     $number = '0123456789';
 
+    /*  $allSymbols = "";
+
+     if ($onlySymbols) {
+         $allSymbols .= $symbols;
+     } */
     $allSymbols = $symbols . $letters . $upLetters . $number;
     $splitSymbols = str_split($allSymbols);
 
@@ -14,7 +19,7 @@ function generatePassword($passwordLen)
     while (strlen($newPassword) < $passwordLen) {
         $newCharacter = $splitSymbols[array_rand($splitSymbols)];
 
-        if (!strpos($newPassword, $newCharacter)) {
+        if ($doubleCharacter || !strpos($newPassword, $newCharacter)) {
             $newPassword .= $newCharacter;
         }
     }

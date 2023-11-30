@@ -3,9 +3,10 @@ session_start();
 include_once __DIR__ . "/partials/functions/functions.php";
 include_once __DIR__ . "./partials/header.php";
 
-if (isset($_GET['passwordLen'])) {
+if (isset($_GET['passwordLen']) && isset($_GET['gridRadios'])) {
     $passwordLen = $_GET['passwordLen'];
-    $_SESSION['password'] = generatePassword($passwordLen);
+    $doubleCharacter = ($_GET['gridRadios'] == 'option2');
+    $_SESSION['password'] = generatePassword($passwordLen, $doubleCharacter);
     header("Location: showpass.php");
     exit();
 }
@@ -31,13 +32,13 @@ if (isset($_GET['passwordLen'])) {
                     <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1"
                         checked>
                     <label class="form-check-label" for="gridRadios1">
-                        Si
+                        No
                     </label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
                     <label class="form-check-label" for="gridRadios2">
-                        No
+                        Si
                     </label>
                 </div>
             </div>
@@ -57,6 +58,8 @@ if (isset($_GET['passwordLen'])) {
             <!--  -->
         </div>
     </form>
+
+
     <!--  -->
 </main>
 </body>
