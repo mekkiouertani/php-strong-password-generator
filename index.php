@@ -8,8 +8,6 @@ if (isset($_GET['passwordLen'])) {
     $_SESSION['password'] = generatePassword($passwordLen);
     header("Location: showpass.php");
     exit();
-} else {
-    echo 'error';
 }
 ?>
 
